@@ -1,4 +1,4 @@
-module linalg
+module linalg_c
 ! C implementation of the matmul routines
 use iso_c_binding, only: c_int, c_float
 implicit none

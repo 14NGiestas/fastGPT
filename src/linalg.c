@@ -1,7 +1,16 @@
 /*
-This file provides matvec implementation using OpenBLAS.
+This file provides matvec implementation using the macOS Accelerate
+Framework, which seems to be the most optimized matrix matrix multiplication
+on macOS.
 */
-#include <cblas.h>
+#ifdef __APPLE__
+    #include "TargetConditionals.h"
+    #ifdef TARGET_OS_MAC
+        #include <Accelerate/Accelerate.h>
+    #endif
+#else
+    #include <cblas.h>
+#endif
 
 void acc_sgemm(int m, int n, int k, float *A, float *B, float *C) {
     //A[m][k]

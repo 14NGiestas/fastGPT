@@ -1,4 +1,4 @@
-module linalg
+module linalg_f
 ! Pure Fortran implementation of the matmul routines
 implicit none
 

@@ -1,5 +1,5 @@
 module gpt2_mod
-use linalg, only: matmul_2d, matmul_2d_t
+use linalg_f, only: matmul_2d, matmul_2d_t
 use tokenizer, only: decode
 implicit none
 

@@ -1,4 +1,5 @@
 gpt2/
+model.gguf
 encoder.json
 input.dat
 model.dat

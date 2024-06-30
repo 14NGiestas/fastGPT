@@ -1,4 +1,4 @@
-module omp
+module omp_dummy
 implicit none
 private
 public :: omp_get_wtime

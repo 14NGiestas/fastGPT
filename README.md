@@ -26,25 +26,15 @@ A quick breakdown of each of the files:
 
 * `gpt2.f90`: the actual GPT-2 model and a decoder
 * `main.f90`: the main driver
-* `create_model.py`: downloads the TensorFlow model and converts to the GGUF
+* `scripts/create_model.py`: downloads the TensorFlow model and converts to the GGUF
   format (`model.gguf`)
-* `encode_input.py`: encodes the text input into tokens (input file for `gpt2`)
+* `scripts/encode_input.py`: encodes the text input into tokens (input file for `gpt2`)
 * Matmul implementations
     * `linalg_f.f90` native Fortran
-    * `linalg_c.f90`, `linalg_accelerate.c` macOS Accelerate Framework
-* `pt.py`: a reference script to run PyTorch (returns the same answer)
+    * `linalg_c.f90`, `linalg.c` in macOS uses Accelerate Framework, openblas otherwise
+* `scripts/reference_pytorch.py`: a reference script to run PyTorch (returns the same answer)
 
 ## Build and Run
-
-Install prerequisites:
-
-    mamba env create -f environment.yml
-    conda activate fastgpt
-
-Configure and build:
-
-    FC=gfortran cmake .
-    make
 
 Download the GPT2 model weights:
 
@@ -57,7 +47,7 @@ parameters.
 
 Run (requires `model.gguf` and `input` in the current directory):
 
-    ./gpt2
+    fpm run chat
 
 ## Creating the GGUF file
 
@@ -67,7 +57,7 @@ corresponding names to be used in `pt.py`, and the approximate download size):
 3GB), "1558M" (`gpt-xl`, 6GB). This will download the model and cache it for
 subsequent runs:
 
-    python create_model.py --models_dir "models" --model_size "124M"
+    python scripts/create_model.py --models_dir "models" --model_size "124M"
 
 This script depends on the `gguf` Python library, that you can install using:
 
